@@ -1,0 +1,6 @@
+<div>You have <span id="ether">?</span>.</div>
+<script>
+eth.changed.connect(function() {
+    document.getElementById("ether").innerText = eth.balanceAt(eth.secretToAddress(eth.key))
+});
+</script>
