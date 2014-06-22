@@ -1,6 +1,38 @@
-<div>You have <span id="ether">?</span>.</div>
+<div>You have <span id="ether">?</span> balance.</div>
+<div>Your address is <span id="coinbase">?</span>.</div>
+<div>Client is listening?<span id="is-listening">?</span>.</div>
+<div>Client is mining?<span id="is-mining">?</span>.</div>
+<div>Gas price is <span id="gas-price">?</span>.</div>
+<div>Your key is <span id="key">?</span>.</div>
+<div>Your keys are <span id="keys">?</span>.</div>
+<div>Your peercount is <span id="peer-count">?</span>.</div>
 <script>
 eth.changed.connect(function() {
-    document.getElementById("ether").innerText = eth.balanceAt(eth.secretToAddress(eth.key))
+    document.getElementById("ether").innerText = eth.balanceAt(eth.secretToAddress(eth.key));
+	/* 
+	 * Properties: For each such item, there is also an asynchronous method, taking a parameter of the 
+	 * callback function, itself taking a single parameter of the property's return value and of the 
+	 * same ame but prefixed with get and recapitalised, e.g. getCoinbase(_fn).
+	 */
+    // Returns the coinbase address of the client
+    document.getElementById("coinbase").innerText = eth.coinbase;
+    //document.getElementById("coinbase").innerText = eth.getCoinbase();	
+    // isListening Returns true if and only if the client is actively listening for network connections.
+    document.getElementById("is-listening").innerText = eth.isListening;
+    // isMining Returns true if and only if the client is actively mining new blocks.
+    document.getElementById("is-mining").innerText = eth.isMining;
+    // gasPrice Returns the special 256-bit number equal to the hard-coded testnet price of gas.
+    document.getElementById("gas-price").innerText = eth.gasPrice;
+    // key Returns the special key-pair object corresponding to the preferred account owned by the client.
+    document.getElementById("key").innerText = eth.key;
+    // keys Returns a list of the special key-pair objects corresponding to all accounts owned by the client.
+    document.getElementById("keys").innerText = eth.keys;
+    // peerCount Returns the number of peers currently connected to the client.
+    document.getElementById("peer-count").innerText = eth.peerCount;
+// Synchronous Getters: For each such item, there is also an asynchronous method, taking an additional parameter of the callback function, itself taking a single parameter of the synchronous method's return value and of the same name but prefixed with get and recapitalised, e.g. getBalanceAt(_a, _fn).
+    // eth.getCoinbase(function(addr) {
+    // 	document.getElementById("coinbase").innerText = addr;	
+    // });
+
 });
 </script>
