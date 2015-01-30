@@ -1,0 +1,9 @@
+def init():
+	self.storage[0] = 'Hello'
+	self.storage[1] = 'World'
+	self.storage[2] = 'Cleese'
+	self.storage[3] = 'Chapman'
+	self.storage[4] = 'Idle'
+	self.storage[5] = 'Palin'
+	self.storage[6] = 'Gilliam'
+	self.storage[8] = 'Jones'

@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title>JavaScript API</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">
+  
+<script type="text/javascript">
+web3.eth.watch({altered: web3.eth.coinbase}).changed(function(){
+  web3.eth.coinbase.then(function(result) {
+    document.getElementById('coinbase').innerText = result;
+  });
+  web3.eth.balanceAt(web3.eth.coinbase).then(function(result){
+    document.getElementById('balance').innerText = web3.toDecimal(result);;  
+  });  
+});
+
+var contractAddress = '0x833937b912300412023b9a03bb62d2efb6745b6f'; 
+
+web3.eth.watch().changed(function(){
+  web3.eth.block(web3.eth.number).then(function(result){
+    document.getElementById('latestBlock').innerText = web3.eth.number._result;
+    document.getElementById('latestBlockHash').innerText = result.hash;
+    document.getElementById('latestBlockTimestamp').innerText = Date(result.timestamp);
+  })
+  web3.eth.storageAt(contractAddress).then(function(result) {
+    document.getElementById('contractString').innerText = JSON.stringify(result);  
+    document.getElementById('favouritePython').innerText = web3.toAscii(result['0x03']);
+  });
+}); 
+
+</script>
+
+</head>
+
+<body>
+
+  <div class="header">
+    <h3>JavaScript API</h3>
+  </div>
+
+  <div class="jumbotron">
+    <h5>Coinbase Address: <strong id="coinbase"></strong></h5>
+    <h5>Balance: <strong id="balance"></strong></h5>
+    <h5>Latest Block Number: <strong id="latestBlock"></strong></h5>
+    <h5>Latest Block Timestamp: <strong id="latestBlockTimestamp"></strong></h5>
+    <h5>Latest Block Hash: <strong id="latestBlockHash"></strong></h5>
+    <h5>Contract String: <strong id="contractString"></strong></h5>
+    <h5>Favourite Python: <strong id="favouritePython"></strong></h5>
+    <br>
+  </div>
+
+</body>
+
+</html>
