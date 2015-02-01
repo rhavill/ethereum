@@ -1,0 +1,6 @@
+def init():
+	self.storage[msg.sender] = 10000
+def send(to, value):
+	if value <= self.storage[msg.sender]:
+		self.storage[to] += value
+		self.storage[msg.sender] -= value  
